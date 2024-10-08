@@ -34,6 +34,9 @@ async def start(thread: int, session_name: str, phone_number: str, proxy: [str, 
                     else:
                         logger.error(f"Thread {thread} | {account} | Can't collect GOLT! Response {status}")
                         continue
+                else:
+                    logger.info(f"Thread {thread} | {account} | Waiting for more GOLT to claim. remaining: {0.001 - miner_balance}")
+                
                 storage = float(await lumcity.get_storage_data())
                 miner = lumcity.get_pickaxe_upgrade(miner_upgrades_data)
                 pickaxe_price = float(miner.get("priceGolt"))
@@ -45,7 +48,7 @@ async def start(thread: int, session_name: str, phone_number: str, proxy: [str, 
                     else:
                         logger.error(f"Thread {thread} | {account} | Can't upgrade! Response {status}: {storage}")
                 else :
-                    logger.info(f"Thread {thread} | {account} | Waiting for more GOLT. remaining: {pickaxe_price - storage}")
+                    logger.info(f"Thread {thread} | {account} | Waiting for more GOLT to upgrade. remaining: {pickaxe_price - storage}")
                 await asyncio.sleep(120)
 
             except ContentTypeError as e:

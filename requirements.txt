@@ -5,3 +5,4 @@ aiohttp==3.9.5
 fake-useragent==1.5.1
 pandas==2.2.2
 aiohttp_socks==0.8.4
+python-dotenv==1.0.1

@@ -1,6 +1,10 @@
-# api id, hash
-API_ID = YOUR API
-API_HASH = 'PASTE YOUR API HASH'
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+API_ID = os.getenv('API_ID')
+API_HASH = os.getenv('API_HASH')
 
 
 DELAYS = {

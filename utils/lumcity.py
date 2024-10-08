@@ -73,16 +73,25 @@ class LumCity:
     @staticmethod
     def get_storage(data):
         #print(f"data storage: {data['storage']}")
+        if data.get('storage') is None:
+            return 0.0
+        
         return float(data.get('storage'))
 
     @staticmethod
     def get_miner_balance(data):
         #print(f"data: {data}")
+        if data.get('balance') is None:
+            return 0.0
+        
         return float(data.get("balance"))
 
     @staticmethod
     def get_pickaxe_upgrade(data):
         #print(f"data: {data}")
+        if data.get('pickaxeUpgrade') is None:
+            return 0.0
+        
         return data["pickaxeUpgrade"]
         #return self.from_nano(data.get('balance'))
 
@@ -99,6 +108,10 @@ class LumCity:
     async def get_storage_data(self):
         resp = await self.session.get('https://back.lumcity.app/balance/all', json={}, headers=self.session.headers)
         #print(f'get balance data: {await resp.json()}')
+        data = await resp.json()
+        if data.get("balances") is None or len(data.get("balances")) < 2:
+            return 0.0
+        
         return (await resp.json()).get("balances")[1].get("amount")
 
     async def get_upgrades_data(self):
