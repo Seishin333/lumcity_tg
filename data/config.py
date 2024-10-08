@@ -1,10 +1,8 @@
 from dotenv import load_dotenv
 import os
 
-# Загружаем переменные из .env файла
 load_dotenv()
 
-# api id, hash
 API_ID = os.getenv('API_ID')
 API_HASH = os.getenv('API_HASH')
 
